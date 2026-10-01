@@ -3,81 +3,330 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>高中物理与数学一对一备课</title>
+  <meta name="description" content="高中物理与数学课堂讲义，含真题讲解、课堂练习和作答区。">
+  <title>高中物理与数学讲义</title>
   <style>
-    :root { --ink:#17212b; --muted:#5c6b76; --line:#d8e0e5; --blue:#145da0; --blue-soft:#eaf3fb; --orange:#c7662d; --bg:#f7f9fa; }
-    * { box-sizing:border-box; }
-    body { margin:0; color:var(--ink); background:var(--bg); font-family:"Microsoft YaHei",system-ui,sans-serif; line-height:1.7; }
-    header { background:#17324d; color:#fff; padding:64px 6vw 56px; }
-    header .eyebrow { color:#b9d7ee; letter-spacing:.08em; font-size:.8rem; text-transform:uppercase; }
-    h1 { max-width:920px; margin:14px 0 12px; font-size:clamp(2rem,5vw,4rem); line-height:1.15; letter-spacing:0; }
-    header p { max-width:720px; color:#e2edf5; margin:0; font-size:1.08rem; }
-    main { width:min(1120px,88vw); margin:0 auto; padding:42px 0 72px; }
-    .intro { display:grid; grid-template-columns:1.3fr 1fr; gap:28px; align-items:start; margin-bottom:44px; }
-    h2 { font-size:1.65rem; margin:0 0 14px; letter-spacing:0; }
-    h3 { font-size:1.08rem; margin:0 0 8px; }
-    p { margin:0 0 12px; }
-    .note { border-left:4px solid var(--orange); padding:4px 0 4px 18px; color:var(--muted); }
-    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .card { background:#fff; border:1px solid var(--line); padding:22px; border-radius:6px; box-shadow:0 4px 14px rgba(23,50,77,.05); }
-    .card .tag { display:inline-block; color:var(--blue); background:var(--blue-soft); font-size:.78rem; padding:2px 8px; border-radius:3px; margin-bottom:12px; }
-    ul { margin:8px 0 0 20px; padding:0; color:var(--muted); }
-    .flow { margin-top:42px; }
-    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-    .step { border-top:3px solid var(--blue); background:#fff; padding:16px; border-radius:4px; }
-    .step strong { display:block; color:var(--blue); margin-bottom:5px; }
-    .sources { margin-top:42px; border-top:1px solid var(--line); padding-top:28px; }
-    .sources a { color:var(--blue); word-break:break-word; }
-    footer { border-top:1px solid var(--line); color:var(--muted); padding:24px 6vw 36px; font-size:.9rem; }
-    @media (max-width:760px) { header { padding:44px 7vw; } main { width:86vw; padding-top:30px; } .intro,.grid,.steps { grid-template-columns:1fr; } h1 { font-size:2.35rem; } }
+    :root {
+      color-scheme: light;
+      --ink: #202321;
+      --muted: #5f6863;
+      --line: #d3d9d5;
+      --paper: #fff;
+      --green: #315f4a;
+      --red: #9d4b3e;
+      --soft: #f4f6f4;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "SimSun", "Songti SC", "Noto Serif CJK SC", serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    a { color: var(--green); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 2px;
+    }
+    .topbar { border-bottom: 1px solid var(--line); }
+    .topbar-inner, main, footer {
+      width: min(920px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+    .topbar-inner {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .site-name { color: var(--ink); font-weight: 700; text-decoration: none; }
+    nav { display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--ink); text-decoration: underline; }
+    main { padding: 28px 0 54px; }
+    h1, h2, h3 { color: var(--ink); line-height: 1.4; }
+    h1 { margin: 0 0 10px; font-size: 27px; text-align: center; }
+    h2 { margin: 25px 0 9px; font-size: 20px; }
+    h3 { margin: 20px 0 7px; font-size: 17px; }
+    p { margin: 7px 0; }
+    .download-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      padding: 9px 0 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .download-row a { text-decoration: none; }
+    .download-row a:hover { text-decoration: underline; }
+    button {
+      border: 1px solid var(--green);
+      border-radius: 3px;
+      padding: 5px 10px;
+      color: var(--green);
+      background: var(--paper);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover { background: var(--soft); }
+    .lesson {
+      padding: 24px 0 30px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 14px;
+    }
+    .lesson-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .lesson-heading h2 { margin: 0; font-size: 23px; }
+    .subject { color: var(--red); font-size: 14px; }
+    .equation {
+      margin: 9px 0;
+      padding-left: 2em;
+      font-family: "Cambria Math", "Times New Roman", serif;
+    }
+    figure { margin: 15px auto; max-width: 760px; }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption { margin-top: 4px; color: var(--muted); font-size: 13px; text-align: center; }
+    .question { margin: 8px 0; padding-left: 2em; text-indent: -2em; }
+    .choices { margin: 8px 0 12px; }
+    .choices p { margin: 4px 0; }
+    .choices.two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2px 22px;
+    }
+    .answer-label { margin: 9px 0 4px; }
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 145px;
+      resize: vertical;
+      padding: 9px 10px;
+      border: 1px solid #aeb7b1;
+      border-radius: 2px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      line-height: 1.7;
+    }
+    .source { margin-top: 10px; color: var(--muted); font-size: 13px; }
+    details { margin-top: 12px; }
+    summary { width: fit-content; color: var(--green); cursor: pointer; }
+    .solution { max-width: 800px; padding-top: 8px; }
+    .solution p { margin: 8px 0; }
+    .subpart { padding-left: 2em; text-indent: -2em; }
+    footer {
+      padding: 18px 0 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 640px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding: 9px 0; gap: 3px; }
+      nav { gap: 6px 15px; }
+      main { padding-top: 20px; }
+      .topbar-inner, main, footer { width: min(100% - 30px, 920px); }
+      h1 { font-size: 24px; }
+      .lesson-heading h2 { font-size: 21px; }
+      .choices.two-col { grid-template-columns: 1fr; }
+      textarea { min-height: 125px; }
+    }
+    @media print {
+      .topbar, .download-row, footer, button { display: none; }
+      main { width: 100%; padding: 0; }
+      .lesson { break-before: page; }
+      .lesson:first-of-type { break-before: auto; }
+      textarea { min-height: 110px; }
+      details:not([open]) > :not(summary) { display: none; }
+      body { font-size: 11pt; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="eyebrow">Private tutoring preparation · 2026</div>
-    <h1>高中物理与数学一对一备课</h1>
-    <p>以诊断为入口，把知识、模型、课堂话术和迁移练习组织成可直接带课的材料。</p>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="site-name" href="#top">高中物理与数学讲义</a>
+      <nav aria-label="讲义目录">
+        <a href="#physics">功与动能</a>
+        <a href="#concept">函数与定义域</a>
+        <a href="#properties">奇偶性与单调性</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section class="intro">
-      <div>
-        <h2>这套材料解决什么问题</h2>
-        <p>物理课从学生的真实卡点出发，先判断是概念、建模、规律条件还是运算表达，再决定主线。数学课先建立函数的对应关系和定义域，再进入单调性、奇偶性与适度拓展。</p>
-        <p>每节课都保留一个独立迁移环节，让教师能够确认学生学会的是方法，而不是原题答案。</p>
+  <main id="top">
+    <h1>高中物理与数学课堂讲义</h1>
+    <div class="download-row">
+      <a href="assets/高中物理数学课堂讲义_学生版合订本.pdf" download>下载合订本 PDF</a>
+      <a href="assets/01_物理_功与动能定理_学生课堂讲义.pdf" download>物理分讲</a>
+      <a href="assets/02_数学_函数概念与定义域_学生课堂讲义.pdf" download>函数与定义域分讲</a>
+      <a href="assets/03_数学_单调性与奇偶性_学生课堂讲义.pdf" download>函数性质分讲</a>
+      <button type="button" onclick="window.print()">打印本页</button>
+    </div>
+
+    <section class="lesson" id="physics">
+      <div class="lesson-heading"><span class="subject">物理</span><h2>功与动能定理</h2></div>
+      <h3>一、功与动能定理</h3>
+      <p>恒力对物体做功 W=Fs cos θ。s 是受力物体对地的位移，功的正负由力和位移的夹角决定。动能定理中，W合是所有力做功的代数和。</p>
+      <p class="equation">W合 = ΔEk = ½mv² - ½mv₀²</p>
+      <p>W-x 图像的斜率可求力；F-x 图像与 x 轴围成的面积表示功。</p>
+
+      <h3>二、真题例题</h3>
+      <p class="question">（2023·山西）一质量为 1 kg 的物体在水平拉力作用下，由静止开始在水平地面上沿 x 轴运动，出发点为 x 轴零点。拉力做的功 W 与物体坐标 x 的关系如图所示。物体与地面间的动摩擦因数为 0.4，g 取 10 m/s²。下列说法正确的是（多选）</p>
+      <figure><img src="assets/wx_graph.png" alt="W-x 图像经过坐标点 (0,0)、(2,12)、(4,18)，两段斜率不同"><figcaption>图 1　拉力做功 W 随位置 x 的变化</figcaption></figure>
+      <div class="choices">
+        <p>A. x=1 m 时，拉力的功率为 6 W。</p>
+        <p>B. x=4 m 时，物体的动能为 2 J。</p>
+        <p>C. 从 x=0 到 x=2 m，物体克服摩擦力做功 8 J。</p>
+        <p>D. 从 x=0 到 x=4 m，物体的最大动量为 2 kg·m/s。</p>
       </div>
-      <p class="note">页面仅展示匿名化教学框架。学生姓名、家长聊天内容和本地 PDF 未公开发布，完整上课材料保留在本机。</p>
-    </section>
-    <section>
-      <h2>三份教案</h2>
-      <div class="grid">
-        <article class="card"><span class="tag">物理 · 高三</span><h3>学情诊断与力学主线</h3><p>用六道短题和零模抽样区分概念、建模、条件、运算与表达问题。</p><ul><li>受力图：摩擦力阻碍相对运动趋势</li><li>功与能：重力做功减去摩擦消耗</li><li>圆周运动：法向与切向分量</li><li>出门测和同结构变式</li></ul></article>
-        <article class="card"><span class="tag">数学 · 高一</span><h3>函数概念与表示</h3><p>从先修诊断进入“一个输入一个输出”，把定义域限制落实到每一道题。</p><ul><li>约分后保留原定义域</li><li>根式、分母限制取交集</li><li>表格与图像读值</li><li>独立题评分标准</li></ul></article>
-        <article class="card"><span class="tag">数学 · 高一</span><h3>单调性与奇偶性</h3><p>按照图像、语言、定义、反例、迁移五步推进，适度连接附件中的高三题型。</p><ul><li>五步作差法完整推导</li><li>断开定义域分开书写</li><li>奇偶性定义域先行</li><li>简单含参与抽象不等式</li></ul></article>
+      <p class="answer-label">解：</p>
+      <textarea data-key="physics-gaokao" aria-label="2023年物理真题作答"></textarea>
+      <p class="source">题源：2023 年山西高考物理多选题。<a href="https://www.51jiaoxi.com/doc-16937612.html" target="_blank" rel="noreferrer">真题题型与答案核对</a>，正确选项 BC。</p>
+      <details>
+        <summary>真题解析</summary>
+        <div class="solution">
+          <p>0≤x≤2 m 时，W-x 图像斜率为 6 N；2≤x≤4 m 时斜率为 3 N。摩擦力 f=μmg=4 N。</p>
+          <p>x=1 m 时，合功为 6-4=2 J，故 v=2 m/s，拉力功率 P=Fv=12 W，A 错。x=4 m 时，Ek=18-4×4=2 J，B 对。从 0 到 2 m，摩擦功为 -8 J，克服摩擦力做功为 8 J，C 对。</p>
+          <p>0 到 2 m 的合力为 2 N，动能增加；2 到 4 m 的合力为 -1 N，动能减少。x=2 m 处动能最大，为 4 J，最大动量为 2√2 kg·m/s，D 错。</p>
+        </div>
+      </details>
+
+      <h3>三、图像题</h3>
+      <p class="question">19．长为 4 m 的水平轨道 AB 与倾角为 37° 的足够长斜面 BC 在 B 处连接。一质量为 2 kg 的滑块从 A 点由静止开始，受水平向右的力 F 作用，F 随位置 x 的变化如图所示。滑块与 AB、BC 间的动摩擦因数均为 0.25，g 取 10 m/s²。</p>
+      <figure><img src="assets/force_position_source.png" alt="F-x 图像：0到2米为20牛，2到3米为0，3到4米为负10牛"><figcaption>图 2　水平拉力 F 随位置 x 的变化</figcaption></figure>
+      <figure><img src="assets/incline_37.png" alt="小滑块从水平轨道进入37度斜面示意图"><figcaption>图 3　滑块冲上斜面</figcaption></figure>
+      <p class="question">（1）求滑块到达 B 处时的速度大小。</p>
+      <p class="question">（2）不计滑块在 B 处的速率变化，求滑块冲上斜面后最终静止的位置与 B 点的距离。</p>
+      <p class="answer-label">解：</p>
+      <textarea data-key="physics-source-19" aria-label="物理图像题作答"></textarea>
+      <p class="source">题源：随课资料《高三物理-3-.pdf》第 14 页第 19 题，图按题面数据重绘。</p>
+      <details>
+        <summary>参考答案</summary>
+        <div class="solution">
+          <p>水平段拉力做功 20×2+0×1-10×1=30 J，摩擦功为 -0.25×2×10×4=-20 J。由动能定理，½×2vB²=10，得 vB=√10 m/s。</p>
+          <p>斜面上重力沿斜面分力为 12 N，摩擦力为 4 N。由动能定理，10-(12+4)s=0，故 s=0.625 m。</p>
+        </div>
+      </details>
+
+      <h3>四、板块问题</h3>
+      <p class="question">7．质量为 M、长度为 L 的木板静止在光滑水平地面上。质量为 m 的小物体放在木板最左端，现用水平恒力 F 作用在小物体上，使物体从静止开始做匀加速直线运动。物体和木板之间的摩擦力大小为 f。当物体滑到木板最右端时，木板对地位移为 x。判断下列说法是否正确。</p>
+      <figure><img src="assets/board_displacement.png" alt="木块相对木板位移L，物体对地位移x加L，木板对地位移x"><figcaption>图 4　物体和木板的位移</figcaption></figure>
+      <div class="choices">
+        <p>A. 物体克服摩擦力做功为 fL。</p>
+        <p>B. 水平恒力 F 对小物体做功为 FL。</p>
+        <p>C. 物体到达木板最右端时的动能为 (F-f)(L+x)。</p>
+        <p>D. 木板到达最右端时的动能为 f(x+L)。</p>
       </div>
+      <p class="answer-label">解：</p>
+      <textarea data-key="physics-board" aria-label="物理板块问题作答"></textarea>
+      <p class="source">题源：随课资料《高三物理-3-.pdf》第 7 页第 7 题。</p>
+      <details>
+        <summary>参考答案</summary>
+        <div class="solution">
+          <p>物体相对木板移动 L，木板对地移动 x，所以物体对地位移为 L+x。恒力对物体做功 F(L+x)，摩擦力对物体做功 -f(L+x)，故 C 正确；木板受摩擦力做功为 fx。A、B、D 错。</p>
+        </div>
+      </details>
     </section>
-    <section class="flow">
-      <h2>案例库</h2>
-      <div class="grid">
-        <article class="card"><h3>物理真题题型 + 仿题</h3><p>公开检索的 2023 山西新高考功能关系 W-x 图像题型：先读斜率得力，再用摩擦功算动能；随后只改摩擦系数做仿题。另有板块临界题，完整走“整体假设→摩擦上限→分体”。</p></article>
-        <article class="card"><h3>函数真题题型 + 仿题</h3><p>出租车分段函数把生活语言、表格、图像和解析式互换；配套定义域与函数值仿题。所有真题题面在 PDF 中注明“投屏前核对原卷”，避免把检索摘要当官方原卷。</p></article>
-        <article class="card"><h3>性质真题演示</h3><p>2021 全国卷函数平移后奇偶性题型：用奇函数零点与偶函数平移逐步回代；再用 1/x 断点、非对称定义域反例检验概念边界。</p></article>
+
+    <section class="lesson" id="concept">
+      <div class="lesson-heading"><span class="subject">数学</span><h2>函数的概念与定义域</h2></div>
+      <h3>一、函数的概念</h3>
+      <p>当一个变量 x 的每个允许取值，都按照同一个对应规则得到唯一的 y 时，y 是 x 的函数，记作 y=f(x)。允许输入的 x 的集合叫做定义域；所有实际输出的 y 的集合叫做值域。</p>
+      <p>同一个输出可以由不同输入得到。例如 f(x)=x² 中，f(-1)=f(1)=1；这仍然是函数。判断时看同一个输入是否对应两个不同输出。</p>
+      <p>例：数对 (-1,2)、(0,2)、(1,3) 表示函数；若再加入 (0,4)，输入 0 就对应两个输出，不再表示函数。</p>
+
+      <h3>二、由解析式求定义域</h3>
+      <p>分式的分母不能为 0；偶次根式中的被开方数不小于 0；对数的真数大于 0。若有多项限制，分别列出后取交集。</p>
+      <p>例：f(x)=√(x+1)/(x-2)。根式要求 x≥-1，分母要求 x≠2，因此定义域为 [-1,2)∪(2,+∞)。约分不能把原函数排除的点加回定义域。</p>
+
+      <h3>三、课堂练习</h3>
+      <p class="question">1. 判断数对 (-1,2)、(0,2)、(1,3) 是否表示函数；添加 (0,4) 后呢？</p>
+      <p class="answer-label">答：</p><textarea data-key="concept-1" aria-label="函数概念第1题作答"></textarea>
+      <p class="question">2. 求 f(x)=√(2x+3)/(x-1) 的定义域。</p>
+      <p class="answer-label">答：</p><textarea data-key="concept-2" aria-label="定义域第2题作答"></textarea>
+      <p class="question">3. 求 g(x)=ln(5-x)/(x+2) 的定义域。</p>
+      <p class="answer-label">答：</p><textarea data-key="concept-3" aria-label="定义域第3题作答"></textarea>
+      <p class="question">4. 周长为 24 cm 的矩形一边长为 x cm，另一边长为 12-x cm。写出面积 S 关于 x 的函数，并写出 x 的取值范围。</p>
+      <p class="answer-label">答：</p><textarea data-key="concept-4" aria-label="函数应用第4题作答"></textarea>
+      <details>
+        <summary>练习参考答案</summary>
+        <div class="solution">
+          <p>1. 原数对表示函数；加上 (0,4) 后不再是函数，因为输入 0 对应两个不同输出。</p>
+          <p>2. 2x+3≥0 且 x≠1，定义域为 [-3/2,1)∪(1,+∞)。</p>
+          <p>3. 5-x>0 且 x+2≠0，定义域为 (-∞,-2)∪(-2,5)。</p>
+          <p>4. S(x)=x(12-x)，且 0<x<12。</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="lesson" id="properties">
+      <div class="lesson-heading"><span class="subject">数学</span><h2>函数的奇偶性与单调性</h2></div>
+      <h3>一、函数的单调性</h3>
+      <p>在区间 I 内任取 x₁、x₂，且 x₁<x₂。若总有 f(x₁)<f(x₂)，则 f 在 I 上递增；若总有 f(x₁)>f(x₂)，则 f 在 I 上递减。</p>
+      <p>用定义证明单调性时，依次完成取值、作差、判断差的符号和下结论。</p>
+      <p>例：证明 f(x)=2x-3 在 R 上递增。任取 x₁<x₂，有</p>
+      <p class="equation">f(x₂)-f(x₁)=2(x₂-x₁)>0</p>
+      <p>所以 f(x₂)>f(x₁)，f 在 R 上递增。</p>
+
+      <h3>二、函数的奇偶性</h3>
+      <p>奇偶性比较 x 与 -x 的函数值，所以定义域必须关于原点对称。先检查定义域，再比较函数值。</p>
+      <p class="equation">偶函数：f(-x)=f(x)　　　奇函数：f(-x)=-f(x)</p>
+      <p>例：f(x)=√(x+1) 的定义域为 [-1,+∞)，不关于原点对称，所以它既不是奇函数，也不是偶函数。</p>
+
+      <h3>三、真题</h3>
+      <p class="question">（2021 年新高考Ⅱ卷第 8 题）设函数 f(x) 的定义域为 R，且 f(x+2) 为偶函数，f(2x+1) 为奇函数，则（　　）</p>
+      <div class="choices two-col">
+        <p>A. f(-1/2)=0</p><p>B. f(-1)=0</p>
+        <p>C. f(2)=0</p><p>D. f(4)=0</p>
       </div>
-    </section>
-    <section class="flow">
-      <h2>通用课堂流程</h2>
-      <div class="steps">
-        <div class="step"><strong>01 了解</strong>确认进度、目标和学生自己的卡点。</div>
-        <div class="step"><strong>02 诊断</strong>用少量覆盖面足够的题目观察思路。</div>
-        <div class="step"><strong>03 讲透</strong>精选一条主线，讲清概念、条件和边界。</div>
-        <div class="step"><strong>04 迁移</strong>让学生独立完成同结构新题并反馈。</div>
-      </div>
-    </section>
-    <section class="sources">
-      <h2>参考方向</h2>
-      <p>知乎检索重点参考了函数教学中“图像→自然语言→定义”、奇偶性先查定义域，以及物理教学中“画图、建模、分过程、临界检验”的课堂组织方式。真题题面以附件资料或公开检索条目为线索；网页不把搜索摘要宣称为官方原卷。</p>
-      <p><a href="https://zhuanlan.zhihu.com/p/427413679">函数概念公开课教案</a> · <a href="https://zhuanlan.zhihu.com/p/433780558">单调性公开课教案</a> · <a href="https://zhuanlan.zhihu.com/p/435509668">奇偶性公开课教案</a> · <a href="https://zhuanlan.zhihu.com/p/594783411">板块模型题型</a> · <a href="https://zhuanlan.zhihu.com/p/2035350991588041305">功能关系题型</a></p>
+      <p class="answer-label">解：</p>
+      <textarea data-key="properties-gaokao" aria-label="2021年数学真题作答"></textarea>
+      <p class="source">真题来源：2021 年普通高等学校招生全国统一考试新高考Ⅱ卷数学第 8 题，正确选项 B。<a href="https://zhuanlan.zhihu.com/p/482966596" target="_blank" rel="noreferrer">题面核对</a></p>
+      <details>
+        <summary>真题解析</summary>
+        <div class="solution">
+          <p>令 h(x)=f(2x+1)。h 为奇函数，所以 h(0)=0，即 f(1)=0。</p>
+          <p>令 g(x)=f(x+2)。g 为偶函数，所以 g(1)=g(-1)，即 f(3)=f(1)=0。</p>
+          <p>再由 h(-1)=-h(1)，得到 f(-1)=-f(3)=0，因此选 B。</p>
+        </div>
+      </details>
+
+      <h3>四、课堂练习</h3>
+      <p class="question">1.（据随课讲义第 16 页第 1 题 C 项）函数 f 的定义域为 [0,+∞)。若对任意 x>0 都有 f(x)<f(0)，则 f 在 [0,+∞) 上一定递减。判断正误，并说明理由。</p>
+      <p class="answer-label">答：</p><textarea data-key="properties-1" aria-label="单调性辨析题作答"></textarea>
+      <p class="question">2. 写出 f(x)=1/x 的单调递减区间，并说明为什么不能合并。</p>
+      <p class="answer-label">答：</p><textarea data-key="properties-2" aria-label="单调区间第2题作答"></textarea>
+      <p class="question">3. 若 f(x)=(a-1)x+2 在 R 上递增，求 a 的取值范围。</p>
+      <p class="answer-label">答：</p><textarea data-key="properties-3" aria-label="参数第3题作答"></textarea>
+      <p class="question">4. 判断 f(x)=x³/(x²+1) 的奇偶性，并写出定义域和判断依据。</p>
+      <p class="answer-label">答：</p><textarea data-key="properties-4" aria-label="奇偶性第4题作答"></textarea>
+      <details>
+        <summary>课堂练习参考答案</summary>
+        <div class="solution">
+          <p>1. 错误。取 f(0)=2，0<x≤1 时 f(x)=0，x>1 时 f(x)=1。所有 x>0 都有 f(x)<f(0)，但 1<2 且 f(1)<f(2)，所以 f 不是递减函数。</p>
+          <p>2. 在 (-∞,0) 和 (0,+∞) 上分别递减。两段不能合并；取 -1<1，却有 f(-1)=-1<f(1)=1。</p>
+          <p>3. 斜率 a-1>0，故 a>1。</p>
+          <p>4. 定义域为 R，关于原点对称；f(-x)=-f(x)，所以 f 是奇函数。</p>
+        </div>
+      </details>
     </section>
   </main>
-  <footer>Prepared for one-to-one tutoring use · 本页面不包含学生个人信息</footer>
+  <footer>讲义题目来源见各题题注。真题解答与练习答案位于题目之后。</footer>
+  <script>
+    for (const field of document.querySelectorAll("textarea[data-key]")) {
+      const key = "class-handout-" + field.dataset.key;
+      field.value = localStorage.getItem(key) || "";
+      field.addEventListener("input", () => localStorage.setItem(key, field.value));
+    }
+  </script>
 </body>
 </html>
